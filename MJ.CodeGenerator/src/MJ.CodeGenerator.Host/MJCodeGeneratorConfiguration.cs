@@ -15,11 +15,11 @@ namespace MJ.CodeGenerator.Host
 
         public bool Logging { get; set; }
 
+        public bool HostDebugging { get; set; }
+
         public object? Raw { get; internal set; }
 
-        public static IMJCodeGeneratorConfiguration Empty() => new MJCodeGeneratorConfiguration() { Raw = new() };
-
-        public static async Task<IMJCodeGeneratorConfiguration?> LoadFrom(string file)
+        public static async Task<MJCodeGeneratorConfiguration?> LoadFrom(string file)
         {
             string configuration;
             using (var reader = new StreamReader(file))

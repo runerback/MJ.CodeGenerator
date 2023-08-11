@@ -16,6 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MJ.CodeGenerator.Host", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MJ.CodeGenerator.MSBuild", "src\MJ.CodeGenerator.MSBuild\MJ.CodeGenerator.MSBuild.csproj", "{3BDD7D5B-DCD8-45AE-AA94-F333102917AC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemas", "schemas", "{3FC73176-74E7-4F25-9DC5-476EF8525A4A}"
+	ProjectSection(SolutionItems) = preProject
+		schemas\mj.codegen.schema.json = schemas\mj.codegen.schema.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

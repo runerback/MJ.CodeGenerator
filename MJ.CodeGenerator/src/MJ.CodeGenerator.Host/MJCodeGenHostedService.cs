@@ -35,9 +35,14 @@ namespace MJ.CodeGenerator.Host
             {
                 _logger.LogInformation("Begin generating code . . .");
 
-                var configuration = await ReadConfiguration() ?? MJCodeGeneratorConfiguration.Empty();
+                var configuration = await ReadConfiguration() ?? new MJCodeGeneratorConfiguration();
                 if (!configuration.Disabled)
                 {
+                    if (configuration.HostDebugging)
+                    {
+                        configuration.TryLaunchDebugger();
+                    }
+
                     foreach (var generator in new MJCodeGeneratorResolver().Resolve(_options.Generators))
                     {
                         try
@@ -82,7 +87,7 @@ namespace MJ.CodeGenerator.Host
             return Task.CompletedTask;
         }
 
-        private async Task<IMJCodeGeneratorConfiguration?> ReadConfiguration()
+        private async Task<MJCodeGeneratorConfiguration?> ReadConfiguration()
         {
             var projectDir = _options.ProjectDir!;
             if (string.IsNullOrWhiteSpace(projectDir) || !Directory.Exists(projectDir))
@@ -102,7 +107,6 @@ namespace MJ.CodeGenerator.Host
 
             return await MJCodeGeneratorConfiguration.LoadFrom(configurationFile);
         }
-
 
         private async Task ExecuteAsync(
             IMJCodeGenerator generator,

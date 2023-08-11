@@ -1,0 +1,33 @@
+{
+  "$id": "mj/codegen/schema.json",
+  "title": "codegenconf",
+  "description": "codegen config file schema",
+  "type": "object",
+  "properties": {
+    "codeGenerator": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "whether disable code generation",
+          "default": false
+        },
+        "logging": {
+          "type": "boolean",
+          "description": "whether save logs to file",
+          "default": false
+        },
+        "debugging": {
+          "type": "boolean",
+          "description": "whether launch debugger when code generation process started",
+          "default": false
+        },
+        "hostDebugging": {
+          "type": "boolean",
+          "description": "whether launch debugger when code generation host started",
+          "default": false
+        }
+      }
+    }
+  }
+}
