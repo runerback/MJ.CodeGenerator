@@ -1,2 +1,3 @@
 # MJ.CodeGenerator
- code generator for mj
+
+MJ code generator for msbuild
