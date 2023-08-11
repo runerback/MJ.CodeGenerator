@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MJ.CodeGenerator.MSBuild" Version="1.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MJ.CodeGenerator.Demo.Refs\MJ.CodeGenerator.Demo.Refs.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MJGenerator Include="../MJ.CodeGenerator.Demo.Generator/MJ.CodeGenerator.Demo.Generator.csproj">
+			<TargetFramework>netstandard2.0</TargetFramework>
+			<Configuration>Debug</Configuration>
+		</MJGenerator>
+	</ItemGroup>
+
+</Project>

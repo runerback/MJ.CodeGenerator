@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>MJ.CodeGenerator.Abstraction</PackageId>
+		<PackageVersion>1.0.2</PackageVersion>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Authors>runerback</Authors>
+		<Title>MJ code generator abstraction</Title>
+		<Description>code generator abstraction for mj</Description>
+		<PackageProjectUrl>https://github.com/runerback/mj.codegenerator</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageOutputPath>../../../packages</PackageOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+
+</Project>

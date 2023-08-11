@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="https://github.com/NuGet/NuGet.Client/blob/dev/src/NuGet.Core/NuGet.Packaging/compiler/resources/nuspec.xsd">
+	<metadata minClientVersion="2.7">
+		<id>MJ.CodeGenerator.MSBuild</id>
+		<version>$(version)</version>
+		<authors>runerback</authors>
+		<title>MJ code generator for msbuild</title>
+		<description>code generator msbuild entry for mj</description>
+		<developmentDependency>true</developmentDependency>
+		<readme>README.md</readme>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/runerback/mj.codegenerator</projectUrl>
+		<dependencies>
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="MJ.CodeGenerator.Abstraction" version="1.0.2" exclude="Analyzers" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- Targets -->
+		<file src=".\MJ.CodeGenerator.MSBuild.targets" target="build" />
+
+		<!-- Task -->
+		<file src=".\bin\Debug\netstandard2.0\publish\MJ.CodeGenerator.MSBuild.dll" target="tools" />
+		<file src=".\bin\Debug\netstandard2.0\publish\MJ.CodeGenerator.MSBuild.deps.json" target="tools" />
+
+		<!-- Host -->
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\MJ.CodeGenerator.Host.exe" target="tools" />
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\MJ.CodeGenerator.Host.runtimeconfig.json" target="tools" />
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\*.dll" target="tools" />
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\*.deps.json" target="tools" />
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\*.config" target="tools" />
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\refs\**\*" target="tools\refs" />
+		<file src="..\MJ.CodeGenerator.Host\bin\Debug\net6.0\publish\runtimes\**\*" target="tools\runtimes" />
+
+		<file src=".\README.md" target="\" />
+	</files>
+</package>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>MJ.CodeGenerator.MSBuild</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="@(PackageReference)" PrivateAssets="all" Publish="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MJ.CodeGenerator.Abstraction\MJ.CodeGenerator.Abstraction.csproj" />
+	</ItemGroup>
+
+</Project>

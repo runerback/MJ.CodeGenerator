@@ -1,0 +1,13 @@
+<Project>
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<DebugType>Embedded</DebugType>
+		<EnableNETAnalyzers>false</EnableNETAnalyzers>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<RootNamespace>MJ.CodeGenerator</RootNamespace>
+	</PropertyGroup>
+
+</Project>

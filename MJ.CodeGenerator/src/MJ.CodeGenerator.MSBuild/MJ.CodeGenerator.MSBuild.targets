@@ -1,0 +1,63 @@
+<Project>
+
+	<PropertyGroup>
+		<CoreCompileDependsOn>MJCodeGen;$(CoreCompileDependsOn)</CoreCompileDependsOn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<MJGeneratedFileNames Condition="'$(MJGeneratedFileNames)'==''">$(MSBuildThisFileName).MJGeneratedFileListAbsolute.txt</MJGeneratedFileNames>
+		<MJGeneratedPathFileNames Condition="'$(MJGeneratedPathFileNames)'==''">$(MSBuildThisFileName).MJGeneratedPathFileListAbsolute.txt</MJGeneratedPathFileNames>
+	</PropertyGroup>
+
+	<UsingTask TaskName="MJCodeGenerationTask" AssemblyFile="../tools/MJ.CodeGenerator.MSBuild.dll" />
+
+	<Target Name="MJCodeGen">
+		<ItemGroup>
+			<MJGeneratedFiles Remove="@(MJGeneratedFiles)" />
+			<MJGeneratedPathFiles Remove="@(MJGeneratedPathFiles)" />
+		</ItemGroup>
+
+		<Exec Command="echo MJ.CodeGenerator - Project = $(ProjectDir)" />
+
+		<MJCodeGenerationTask
+			ProjectDir="$(ProjectDir)"
+			OutputPath="$(IntermediateOutputPath)"
+			RootNamespace="$(AssemblyName)"
+			ExternalReferences="@(_ResolvedProjectReferencePaths)"
+			MJGenerators="@(MJGenerator)">
+			<Output ItemName="MJGeneratedFiles" TaskParameter="GeneratedCodeFiles" />
+			<Output ItemName="FileWrites" TaskParameter="GeneratedPlainFiles" />
+			<Output ItemName="MJGeneratedPathFiles" TaskParameter="GeneratedPaths" />
+		</MJCodeGenerationTask>
+
+		<WriteLinesToFile File="$(IntermediateOutputPath)$(MJGeneratedFileNames)" Lines="@(MJGeneratedFiles)" Overwrite="true" />
+		<WriteLinesToFile File="$(IntermediateOutputPath)$(MJGeneratedPathFileNames)" Lines="@(MJGeneratedPathFiles)" Overwrite="true" />
+	</Target>
+
+	<Target Name="MJTestCodeGenerated" AfterTargets="MJCodeGen">
+		<ItemGroup>
+			<FileWrites Include="$(IntermediateOutputPath)$(MJGeneratedFileNames)" />
+			<FileWrites Include="$(IntermediateOutputPath)$(MJGeneratedPathFileNames)" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<Compile Include="@(MJGeneratedFiles)" />
+			<_GeneratedCodeFiles Include="@(MJGeneratedFiles)" />
+		</ItemGroup>
+	</Target>
+
+	<PropertyGroup>
+		<CoreCleanDependsOn>MJCodeCleanPrepare;$(CoreCleanDependsOn)</CoreCleanDependsOn>
+	</PropertyGroup>
+
+	<Target Name="MJCodeCleanPrepare">
+		<ReadLinesFromFile File="$(IntermediateOutputPath)$(MJGeneratedPathFileNames)" Condition="'@(MJGeneratedPathFiles)'==''">
+			<Output TaskParameter="Lines" ItemName="MJGeneratedPathFiles" />
+		</ReadLinesFromFile>
+	</Target>
+
+	<Target Name="MJGeneratedPathsClean" AfterTargets="Clean" Condition="'@(MJGeneratedPathFiles)'!=''">
+		<RemoveDir Directories="@(MJGeneratedPathFiles)" />
+	</Target>
+
+</Project>
