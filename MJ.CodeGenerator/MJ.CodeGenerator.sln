@@ -7,11 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4ED658C7-237
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MJ.CodeGenerator.Abstraction", "src\MJ.CodeGenerator.Abstraction\MJ.CodeGenerator.Abstraction.csproj", "{26012FAC-3092-4A4F-8D25-8384F59F0E9F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59DDCDAA-1A2A-4474-84B9-D3F92A7AF6CD}"
-	ProjectSection(SolutionItems) = preProject
-		Directory.Build.props = Directory.Build.props
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MJ.CodeGenerator.Host", "src\MJ.CodeGenerator.Host\MJ.CodeGenerator.Host.csproj", "{E1AABFCE-C4CB-4AAD-AB04-CE843B10A233}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MJ.CodeGenerator.MSBuild", "src\MJ.CodeGenerator.MSBuild\MJ.CodeGenerator.MSBuild.csproj", "{3BDD7D5B-DCD8-45AE-AA94-F333102917AC}"

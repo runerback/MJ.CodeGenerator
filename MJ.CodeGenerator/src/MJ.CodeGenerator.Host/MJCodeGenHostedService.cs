@@ -41,6 +41,7 @@ namespace MJ.CodeGenerator.Host
                     if (configuration.HostDebugging)
                     {
                         configuration.TryLaunchDebugger();
+                        await configuration.WaitForDebugger();
                     }
 
                     foreach (var generator in new MJCodeGeneratorResolver().Resolve(_options.Generators))
