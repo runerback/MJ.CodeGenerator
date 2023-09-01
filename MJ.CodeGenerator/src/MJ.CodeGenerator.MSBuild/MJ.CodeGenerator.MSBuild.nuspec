@@ -9,7 +9,7 @@
 		<developmentDependency>true</developmentDependency>
 		<readme>README.md</readme>
 		<license type="expression">MIT</license>
-		<releaseNotes>* wait for debugger on host</releaseNotes>
+		<releaseNotes>* include generated codes during design time build.</releaseNotes>
 		<projectUrl>https://github.com/runerback/mj.codegenerator</projectUrl>
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">

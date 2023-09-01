@@ -34,11 +34,24 @@
 		<WriteLinesToFile File="$(IntermediateOutputPath)$(MJGeneratedPathFileNames)" Lines="@(MJGeneratedPathFiles)" Overwrite="true" />
 	</Target>
 
-	<Target Name="MJTestCodeGenerated" AfterTargets="MJCodeGen">
+	<Target Name="MJCodeGenerated" AfterTargets="MJCodeGen">
 		<ItemGroup>
 			<FileWrites Include="$(IntermediateOutputPath)$(MJGeneratedFileNames)" />
 			<FileWrites Include="$(IntermediateOutputPath)$(MJGeneratedPathFileNames)" />
 		</ItemGroup>
+
+		<ItemGroup>
+			<Compile Include="@(MJGeneratedFiles)" />
+			<_GeneratedCodeFiles Include="@(MJGeneratedFiles)" />
+		</ItemGroup>
+	</Target>
+
+	<Target Name="MJIncludeCodeGeneratedDuringDesignTimeBuild"
+		BeforeTargets="AssignTargetPaths"
+		Condition="'@(MJGeneratedFiles)'=='' and Exists('$(IntermediateOutputPath)$(MJGeneratedFileNames)')">
+		<ReadLinesFromFile File="$(IntermediateOutputPath)$(MJGeneratedFileNames)">
+			<Output TaskParameter="Lines" ItemName="MJGeneratedFiles" />
+		</ReadLinesFromFile>
 
 		<ItemGroup>
 			<Compile Include="@(MJGeneratedFiles)" />
