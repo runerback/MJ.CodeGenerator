@@ -57,14 +57,14 @@ namespace MJ.CodeGenerator.MsBuild
                 var host = Path.Combine(AssemblyPath, "MJ.CodeGenerator.Host.dll");
                 if (!File.Exists(host))
                 {
-                    Log.LogCriticalMessage("", "", "", "", 0, 0, 0, 0, "code generator host not found");
+                    LogMessage("code generator host not found");
                     return true;
                 }
 
                 var generators = GeneratorIterator().Distinct().ToArray();
                 if (generators.Length == 0)
                 {
-                    Log.LogCriticalMessage("", "", "", "", 0, 0, 0, 0, "code generator not found");
+                    LogMessage("No valid code generator present");
                     return true;
                 }
 
@@ -128,7 +128,7 @@ namespace MJ.CodeGenerator.MsBuild
 
                 if (errorBuilder.Length > 0)
                 {
-                    Log.LogCriticalMessage("", "", "", "", 0, 0, 0, 0, errorBuilder.ToString());
+                    LogMessage(errorBuilder.ToString());
                     return false;
                 }
 
@@ -184,24 +184,54 @@ namespace MJ.CodeGenerator.MsBuild
                 var generatorPath = Path.Combine(generatorOutputPath, $"{outputFileName}.dll");
                 if (!File.Exists(generatorPath))
                 {
-                    var dotnetBuild = Process.Start(new ProcessStartInfo("dotnet", $"build \"{generatorProjPath}\" --configuration {configuration} --framework {targetFramework} --output \"{generatorOutputPath}\"")
+                    var dotnetCommandLine = $"build \"{generatorProjPath}\" --configuration {configuration} --framework {targetFramework} --output \"{generatorOutputPath}\"";
+                    var dotnetBuild = new Process
                     {
-                        UseShellExecute = false,
-                    })!;
+                        StartInfo = new ProcessStartInfo("dotnet", dotnetCommandLine)
+                        {
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true,
+                        },
+                    };
+
+                    var outputBuilder = new StringBuilder();
+                    dotnetBuild.OutputDataReceived += (_, e) =>
+                    {
+                        outputBuilder.AppendLine(e.Data ?? "");
+                    };
+                    dotnetBuild.ErrorDataReceived += (_, e) =>
+                    {
+                        outputBuilder.AppendLine(e.Data ?? "");
+                    };
+
+                    LogMessage($"Begin build generator: {outputFileName}");
+                    dotnetBuild.Start();
+                    dotnetBuild.BeginOutputReadLine();
+                    dotnetBuild.BeginErrorReadLine();
+
                     if (!dotnetBuild.WaitForExit(30000))
                     {
                         dotnetBuild.Kill();
-                        continue;
                     }
 
                     if (!File.Exists(generatorPath))
                     {
+                        LogMessage(outputBuilder.ToString());
+                        LogMessage($"Generator build failed: {outputFileName}");
                         continue;
                     }
+
+                    LogMessage($"Ready: {outputFileName}");
                 }
 
                 yield return generatorPath;
             }
+        }
+
+        private void LogMessage(string message)
+        {
+            Log.LogCriticalMessage("", "", "", "", 0, 0, 0, 0, message);
         }
 
         private bool TryGetResult(string output, string buildId, out MJCodeGenerationResult result)

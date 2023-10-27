@@ -9,7 +9,7 @@
 		<developmentDependency>true</developmentDependency>
 		<readme>README.md</readme>
 		<license type="expression">MIT</license>
-		<releaseNotes>* build code generator to calling project.</releaseNotes>
+		<releaseNotes>* build code generator to calling project with log.</releaseNotes>
 		<projectUrl>https://github.com/runerback/mj.codegenerator</projectUrl>
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
