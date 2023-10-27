@@ -2,10 +2,11 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
+		<RestoreSources>../../../packages;$(RestoreSources)</RestoreSources>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MJ.CodeGenerator.MSBuild" Version="1.0.3">
+		<PackageReference Include="MJ.CodeGenerator.MSBuild" Version="1.0.8">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -21,5 +22,12 @@
 			<Configuration>Debug</Configuration>
 		</MJGenerator>
 	</ItemGroup>
+
+	<ProjectExtensions>
+		<VisualStudio>
+			<!-- or repo url -->
+			<UserProperties codegen_1json__JsonSchema="../../../MJ.CodeGenerator/schemas/mj.codegen.schema.json" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

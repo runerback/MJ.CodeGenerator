@@ -26,6 +26,8 @@ namespace MJ.CodeGenerator.MsBuild
 
         public string? OutputPath { get; set; }
 
+        public string? GeneratorOutputPath { get; set; }
+
         public string? RootNamespace { get; set; }
 
         public string? ExternalReferences { get; set; }
@@ -158,6 +160,8 @@ namespace MJ.CodeGenerator.MsBuild
                 yield break;
             }
 
+            var generatorOutputPath = Path.GetFullPath(Path.Combine(ProjectDir, GeneratorOutputPath, "generator"));
+
             foreach (var generatorItem in MJGenerators)
             {
                 var generatorProject = generatorItem.ItemSpec;
@@ -170,16 +174,17 @@ namespace MJ.CodeGenerator.MsBuild
 
                 var targetFramework = generatorItem.GetMetadata("TargetFramework") ?? "netstandard2.0";
                 var configuration = generatorItem.GetMetadata("Configuration") ?? "Debug";
-                var generatorPath = Path.Combine(
-                    Path.GetDirectoryName(generatorProjPath)!,
-                    "bin",
-                    configuration,
-                    targetFramework,
-                    $"{Path.GetFileNameWithoutExtension(generatorProjPath)}.dll");
 
+                var outputFileName = generatorItem.GetMetadata("AssemblyName");
+                if (string.IsNullOrWhiteSpace(outputFileName))
+                {
+                    outputFileName = Path.GetFileNameWithoutExtension(generatorProjPath);
+                }
+
+                var generatorPath = Path.Combine(generatorOutputPath, $"{outputFileName}.dll");
                 if (!File.Exists(generatorPath))
                 {
-                    var dotnetBuild = Process.Start(new ProcessStartInfo("dotnet", $"build \"{generatorProjPath}\" -c {configuration} -f {targetFramework}")
+                    var dotnetBuild = Process.Start(new ProcessStartInfo("dotnet", $"build \"{generatorProjPath}\" --configuration {configuration} --framework {targetFramework} --output \"{generatorOutputPath}\"")
                     {
                         UseShellExecute = false,
                     })!;
