@@ -38,7 +38,7 @@ namespace MJ.CodeGenerator.Host
 
         public void AddErrorLog(Exception exception, string? error = default)
         {
-            var message = exception + (string.IsNullOrWhiteSpace(error) ? string.Empty : " " + error);
+            var message = exception + (string.IsNullOrWhiteSpace(error) ? string.Empty : $"{Environment.NewLine}Additional info: {error}");
 
             _logs.Add($"{LogHeader("Error")} {message}");
             _logger.LogError(message);
