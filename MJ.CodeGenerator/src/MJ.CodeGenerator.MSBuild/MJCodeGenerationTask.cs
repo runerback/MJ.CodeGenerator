@@ -132,7 +132,11 @@ namespace MJ.CodeGenerator.MsBuild
                     }
                     else
                     {
-                        process.Kill();
+                        try
+                        {
+                            process.Kill();
+                        }
+                        catch { }
                     }
                 }
 
