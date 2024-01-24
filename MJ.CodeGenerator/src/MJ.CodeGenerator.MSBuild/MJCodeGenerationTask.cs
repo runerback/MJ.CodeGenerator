@@ -32,6 +32,8 @@ namespace MJ.CodeGenerator.MsBuild
 
         public string? ExternalReferences { get; set; }
 
+        public string? Debugging { get; set; }
+
         public Microsoft.Build.Framework.ITaskItem[]? MJGenerators { get; set; }
 
         [Microsoft.Build.Framework.Output]
@@ -50,6 +52,14 @@ namespace MJ.CodeGenerator.MsBuild
         {
             try
             {
+                if (
+                    !string.IsNullOrWhiteSpace(Debugging) &&
+                    bool.TryParse(Debugging, out var debugging) &&
+                    debugging)
+                {
+                    this.TryLaunchDebugger();
+                }
+
                 _generatedCodeFiles.Clear();
                 _generatedPlainFiles.Clear();
                 _generatedPaths.Clear();

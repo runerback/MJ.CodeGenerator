@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<Configuration>Debug</Configuration>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>MJ.CodeGenerator.Abstraction</PackageId>
-		<PackageVersion>1.0.3</PackageVersion>
+		<PackageVersion>1.0.9-preview3</PackageVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Authors>runerback</Authors>
 		<Title>MJ code generator abstraction</Title>
@@ -12,7 +13,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageOutputPath>../../../packages</PackageOutputPath>
 		<PackageReleaseNotes>
-			* MJ.CodeGenerator.Abstraction.1.0.3: Add `WaitForDebugger`. JIT debugger could not attach to generator, need attach to host process.
+			* MJ.CodeGenerator.Abstraction.1.0.9: nothing changed.
 		</PackageReleaseNotes>
 	</PropertyGroup>
 

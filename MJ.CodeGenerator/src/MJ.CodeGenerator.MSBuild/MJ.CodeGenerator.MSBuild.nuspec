@@ -13,7 +13,7 @@
 		<projectUrl>https://github.com/runerback/mj.codegenerator</projectUrl>
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="MJ.CodeGenerator.Abstraction" version="1.0.2" exclude="Analyzers" />
+				<dependency id="MJ.CodeGenerator.Abstraction" version="1.0.3" exclude="Analyzers" />
 			</group>
 		</dependencies>
 	</metadata>

@@ -25,7 +25,8 @@
 			GeneratorOutputPath="$(OutputPath)"
 			RootNamespace="$(AssemblyName)"
 			ExternalReferences="@(_ResolvedProjectReferencePaths)"
-			MJGenerators="@(MJGenerator)">
+			MJGenerators="@(MJGenerator)"
+			Debugging="$(MJCodeGen_Debugging)">
 			<Output ItemName="MJGeneratedFiles" TaskParameter="GeneratedCodeFiles" />
 			<Output ItemName="FileWrites" TaskParameter="GeneratedPlainFiles" />
 			<Output ItemName="MJGeneratedPathFiles" TaskParameter="GeneratedPaths" />
