@@ -86,5 +86,59 @@ namespace MJ.CodeGenerator.Analyzers {
                 return ResourceManager.GetString("RegenerateSerializationAttributesTitle", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The [Alias] attribute must be unique to the declaring type..
+        /// </summary>
+        internal static string AliasClashDetectedDescription {
+            get {
+                return ResourceManager.GetString("AliasClashDetectedDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Rename duplicated [Alias].
+        /// </summary>
+        internal static string AliasClashDetectedMessageFormat {
+            get {
+                return ResourceManager.GetString("AliasClashDetectedMessageFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Rename duplicated [Alias].
+        /// </summary>
+        internal static string AliasClashDetectedTitle {
+            get {
+                return ResourceManager.GetString("AliasClashDetectedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add missing [Alias].
+        /// </summary>
+        internal static string AddAliasAttributesTitle {
+            get {
+                return ResourceManager.GetString("AddAliasAttributesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add missing [Alias].
+        /// </summary>
+        internal static string AddAliasMessageFormat {
+            get {
+                return ResourceManager.GetString("AddAliasMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add [Alias] to specify well-known names that can be used to identify types or methods..
+        /// </summary>
+        internal static string AddAliasAttributesDescription {
+            get {
+                return ResourceManager.GetString("AddAliasAttributesDescription", resourceCulture);
+            }
+        }        
     }
 }

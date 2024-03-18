@@ -126,4 +126,22 @@
   <data name="RegenerateSerializationAttributesTitle" xml:space="preserve">
     <value>Regenerate serialization attributes</value>
   </data>
+  <data name="AliasClashDetectedDescription" xml:space="preserve">
+    <value>The [Alias] attribute must be unique to the declaring type.</value>
+  </data>
+  <data name="AliasClashDetectedMessageFormat" xml:space="preserve">
+    <value>Rename duplicated named [Alias]</value>
+  </data>
+  <data name="AliasClashDetectedTitle" xml:space="preserve">
+    <value>Rename duplicated named [Alias]</value>
+  </data>
+  <data name="AddAliasAttributesTitle" xml:space="preserve">
+    <value>Add missing named [Alias]</value>
+  </data>
+  <data name="AddAliasMessageFormat" xml:space="preserve">
+    <value>Add missing named [Alias]</value>
+  </data>
+  <data name="AddAliasAttributesDescription" xml:space="preserve">
+    <value>Add named [Alias] to specify well-known names that can be used to identify types or methods.</value>
+  </data>
 </root>

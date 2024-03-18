@@ -34,6 +34,8 @@ namespace MJ.CodeGenerator.MsBuild
 
         public string? Debugging { get; set; }
 
+        public string? Timeout { get; set; }
+
         public Microsoft.Build.Framework.ITaskItem[]? MJGenerators { get; set; }
 
         [Microsoft.Build.Framework.Output]
@@ -52,13 +54,7 @@ namespace MJ.CodeGenerator.MsBuild
         {
             try
             {
-                if (
-                    !string.IsNullOrWhiteSpace(Debugging) &&
-                    bool.TryParse(Debugging, out var debugging) &&
-                    debugging)
-                {
-                    this.TryLaunchDebugger();
-                }
+                LaunchDebugger();
 
                 _generatedCodeFiles.Clear();
                 _generatedPlainFiles.Clear();
@@ -120,25 +116,7 @@ namespace MJ.CodeGenerator.MsBuild
 
                 process.Start();
                 process.BeginOutputReadLine();
-
-                if (!process.WaitForExit(30000))
-                {
-                    var anyDebuggerAttachedToProcess = false;
-                    if (
-                        CheckRemoteDebuggerPresent(process.Handle, ref anyDebuggerAttachedToProcess) &&
-                        anyDebuggerAttachedToProcess)
-                    {
-                        process.WaitForExit(); // debugging
-                    }
-                    else
-                    {
-                        try
-                        {
-                            process.Kill();
-                        }
-                        catch { }
-                    }
-                }
+                WaitForHost(process);
 
                 if (errorBuilder.Length > 0)
                 {
@@ -159,6 +137,49 @@ namespace MJ.CodeGenerator.MsBuild
             {
                 Log.LogErrorFromException(exp);
                 return false;
+            }
+        }
+
+        [DebuggerStepThrough]
+        private void LaunchDebugger()
+        {
+            if (
+                !string.IsNullOrWhiteSpace(Debugging) &&
+                bool.TryParse(Debugging, out var debugging) &&
+                debugging)
+            {
+                this.TryLaunchDebugger();
+            }
+        }
+
+        private void WaitForHost(Process host)
+        {
+            var timeout = 30000;
+            if (
+                !string.IsNullOrWhiteSpace(Timeout) &&
+                int.TryParse(Timeout, out var timeoutConfig) &&
+                timeoutConfig > timeout)
+            {
+                timeout = timeoutConfig;
+            }
+
+            if (!host.WaitForExit(timeout))
+            {
+                var anyDebuggerAttachedToProcess = false;
+                if (
+                    CheckRemoteDebuggerPresent(host.Handle, ref anyDebuggerAttachedToProcess) &&
+                    anyDebuggerAttachedToProcess)
+                {
+                    host.WaitForExit(); // debugging
+                }
+                else
+                {
+                    try
+                    {
+                        host.Kill();
+                    }
+                    catch { }
+                }
             }
         }
 

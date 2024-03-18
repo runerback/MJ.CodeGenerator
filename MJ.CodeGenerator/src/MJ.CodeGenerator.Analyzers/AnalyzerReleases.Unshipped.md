@@ -6,3 +6,4 @@
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
 MJORLEANS0004 | Usage | Info | RegenerateSerializerAttributeAnalyzer
+MJORLEANS0010 | Usage | Info | GenerateNamedAliasAttributesAnalyzer

@@ -113,6 +113,7 @@ namespace MJ.CodeGenerator.Analyzers.Tests
                 typeof(Attribute).Assembly,
                 typeof(int).Assembly,
                 typeof(object).Assembly,
+                typeof(Orleans.TransactionAttribute).Assembly,
                 typeof(RegenerateSerializerAttributeAnalyzer).Assembly,
             };
 

@@ -6,7 +6,7 @@
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>MJ.CodeGenerator.Analyzers</PackageId>
-		<PackageVersion>1.0.0</PackageVersion>
+		<PackageVersion>1.0.1</PackageVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Authors>runerback</Authors>
 		<Title>MJ code generator analyzers</Title>
@@ -19,6 +19,7 @@
 		<PackageOutputPath>../../../packages</PackageOutputPath>
 		<PackageReleaseNotes>
 			* MJ.CodeGenerator.Analyzers.1.0.0: Add `RegenerateOrleansSerializationAttributesCodeFix` for `Orleans.IdAttribute` reorder.
+			* MJ.CodeGenerator.Analyzers.1.0.1: Add `GenerateNamedAliasAttributesCodeFix` for `Orleans.AliasAttribute` with `nameof` operator.
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
